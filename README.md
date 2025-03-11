@@ -1,1 +1,1 @@
-skibidi sigma toilet
+nuh uh
