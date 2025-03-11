@@ -13,7 +13,7 @@ This project is a simple Pokedex web application that allows users to view and s
 - CSS
 - JavaScript
 - SQL (for the database)
-- [Your choice of web framework, e.g., Flask, Django, etc.]
+- PHP
 
 ## Setup Instructions
 1. Clone the repository:
@@ -27,9 +27,9 @@ This project is a simple Pokedex web application that allows users to view and s
 3. Set up the database:
     - Create a new database named `pokedex`.
     - Run the provided SQL script to create the necessary tables and populate them with data.
-4. Start the web server:
+4. Start the PHP server:
     ```bash
-    [Command to start your web server, e.g., python app.py]
+    php -S localhost:8000
     ```
 5. Open your web browser and navigate to `http://localhost:8000` to view the application.
 

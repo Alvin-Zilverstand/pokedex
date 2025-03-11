@@ -1,0 +1,33 @@
+CREATE DATABASE IF NOT EXISTS pokedex;
+
+USE pokedex;
+
+CREATE TABLE IF NOT EXISTS pokemons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    stats JSON NOT NULL,
+    info TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS abilities (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pokemon_id INT NOT NULL,
+    ability VARCHAR(255) NOT NULL,
+    FOREIGN KEY (pokemon_id) REFERENCES pokemons(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS moves (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pokemon_id INT NOT NULL,
+    move VARCHAR(255) NOT NULL,
+    FOREIGN KEY (pokemon_id) REFERENCES pokemons(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS evolutions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pokemon_id INT NOT NULL,
+    evolves_to VARCHAR(255) NOT NULL,
+    FOREIGN KEY (pokemon_id) REFERENCES pokemons(id) ON DELETE CASCADE
+);
