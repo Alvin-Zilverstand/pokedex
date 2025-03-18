@@ -4,10 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json();
+            return response.text().then(text => {
+                try {
+                    return JSON.parse(text);
+                } catch (error) {
+                    console.error('JSON parse error:', error, text);
+                    throw error;
+                }
+            });
         })
         .then(pokemons => {
             const pokemonList = document.getElementById('pokemon-list');
+            pokemonList.innerHTML = '';
             pokemons.forEach(pokemon => {
                 const card = document.createElement('div');
                 card.className = 'pokemon-card';
