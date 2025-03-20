@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
@@ -9,6 +9,19 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
+
+const types = [
+    'normal', 'fire', 'water', 'electric', 'grass', 'ice', 'fighting', 'poison', 'ground', 'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy'
+];
+
+const insertTypes = () => {
+    types.forEach(type => {
+        const typeQuery = `INSERT INTO types (name) VALUES (?) ON DUPLICATE KEY UPDATE name=name`;
+        connection.query(typeQuery, [type], (error, results, fields) => {
+            if (error) throw error;
+        });
+    });
+};
 
 const fetchPokemonData = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
@@ -68,6 +81,7 @@ const insertPokemonData = (pokemon) => {
 };
 
 const fetchAndInsertAllPokemon = async () => {
+    insertTypes();
     for (let i = 1; i <= 1010; i++) {
         const pokemon = await fetchPokemonData(i);
         insertPokemonData(pokemon);
