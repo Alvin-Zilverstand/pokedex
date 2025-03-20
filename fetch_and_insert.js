@@ -23,6 +23,24 @@ const insertTypes = () => {
     });
 };
 
+const insertAbilities = (abilities) => {
+    abilities.forEach(ability => {
+        const abilityQuery = `INSERT INTO abilities (name) VALUES (?) ON DUPLICATE KEY UPDATE name=name`;
+        connection.query(abilityQuery, [ability.ability.name], (error, results, fields) => {
+            if (error) throw error;
+        });
+    });
+};
+
+const insertEggGroups = (eggGroups) => {
+    eggGroups.forEach(group => {
+        const eggGroupQuery = `INSERT INTO egg_groups (name) VALUES (?) ON DUPLICATE KEY UPDATE name=name`;
+        connection.query(eggGroupQuery, [group.name], (error, results, fields) => {
+            if (error) throw error;
+        });
+    });
+};
+
 const fetchPokemonData = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
     const url2 = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
@@ -127,6 +145,8 @@ const fetchAndInsertAllPokemon = async () => {
     for (let i = 1; i <= 1010; i++) {
         try {
             const pokemon = await fetchPokemonData(i);
+            insertAbilities(pokemon.data.abilities);
+            insertEggGroups(pokemon.data2.egg_groups);
             insertPokemonData(pokemon);
         } catch (error) {
             console.error(`Error fetching/inserting Pokémon with ID ${i}:`, error);
