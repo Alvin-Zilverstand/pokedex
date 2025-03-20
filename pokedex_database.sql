@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS pokemon (
 -- Table to store Pokémon types
 CREATE TABLE IF NOT EXISTS types (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL
+    name VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- Table to store Pokémon abilities
