@@ -463,9 +463,6 @@ a {
 #regionSelect::-webkit-scrollbar {
   display: none;
 }
-#regionSelect::-moz-scrollbar {
-  display: none;
-}
 
 #regionSelect span {
   background-color: rgba(46, 46, 46, 0.1);
@@ -605,7 +602,7 @@ a {
 .dark-mode #regionSelect span {
   border: 1px solid #ccc; 
 }
-relative
+
 .dark-mode #regionSelect span:hover{
   color: black;
   background-color: #ead51d;

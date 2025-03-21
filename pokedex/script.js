@@ -1,5 +1,4 @@
 const poke_container = document.getElementById("poke-container");
-const pokemon_count = 1010;
 const colors = {
   fire: "#e03a3a",
   grass: "#50C878",
@@ -66,40 +65,25 @@ const regions = {
 const loader = document.querySelector(".lds-ring");
 const fetchPokemons = async (region) => {
   const { start, end } = regions[region];
-
   loader.classList.add("ring-active");
-  
-  for (let i = start; i <= end; i++) {
-    const pokemonName = i.toString();
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
-    let res = await fetch(url);
-    let data = await res.json();
-    loader.classList.remove('ring-active')
-    createPokemonCard(data);
-    setTimeout(() => {
-    }, "150");
+  const url = `http://localhost/pokedex/pokedex/get_pokemons.php?start=${start}&end=${end}`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    const data = await res.json();
+    loader.classList.remove('ring-active');
+    data.forEach(pokemon => createPokemonCard(pokemon));
+  } catch (error) {
+    console.error('Error fetching Pokémon data:', error);
   }
 };
 
 const main_types = Object.keys(colors);
 
-// const fetchPokemons = async () => {
-//   for (let i = 1; i <= pokemon_count; i++) {
-//     await getPokemon(i);
-//   }
-// };
-
-// const getPokemon = async (id) => {
-//   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   console.log(data);
-//   createPokemonCard(data);
-// };
-
 const createPokemonCard = (pokemon) => {
-
   const pokemonEl = document.createElement("div");
   pokemonEl.classList.add("card");
   pokemonEl.id = pokemon.id;
@@ -111,32 +95,14 @@ const createPokemonCard = (pokemon) => {
     name = name;
   }
   const id = pokemon.id.toString().padStart(3, "0");
-  //    const moves = [];
-  //    try {
-  //     for (let i = 0; i <= 1 ; i++) {
-  //             moves.push(pokemon.moves[i].move.name);
-  //     }
-  //     console.log(moves);
-  //     } catch (error) {
-  //         console.log(error);
-  //     }
 
   let weight = pokemon.weight / 10 + "kg";
   let height = pokemon.height / 10 + "m";
 
-  const poke_types = pokemon.types.map((type) => type.type.name);
+  const poke_types = pokemon.types;
   const type = main_types.find((type) => poke_types.indexOf(type) > -1);
   const color = colors[type];
-  let frontImg;
-  let backImg;
-  try{
-    frontImg = pokemon.sprites.front_default;
-    backImg = pokemon.sprites.back_default;
-  }
-  catch(err){
-    frontImg = "#";
-    backImg = "#";
-  }
+  const frontImg = pokemon.image_url;
 
   pokemonEl.style.backgroundColor = color;
 
@@ -149,22 +115,16 @@ const createPokemonCard = (pokemon) => {
         <span class="number">#${id}</span>
         <h3 class="name">${name}</h3>
         <div class="types">
-          ${poke_types
-            .map(
-              (type) => `
-                <div class="poke__type__bg ${type}">
-                <img src="Icons/${type}.svg" alt="Type">
-                </div>
-          `
-            )
-            .join("")}
+          ${poke_types.map(type => `
+            <div class="poke__type__bg ${type}">
+              <img src="Icons/${type}.svg" alt="Type">
+            </div>
+          `).join("")}
         </div>
     </div>
     <div class="back side">
         <div class="img-container">
-        <img class="image" src="${
-          backImg == null ? frontImg : backImg
-        }" alt="${name}" />
+        <img class="image" src="${frontImg}" alt="${name}" />
         <img class="background" src="./Icons/default/pokeball.svg" alt="pokeball">
         </div>
         <span class="number">#${id}</span>
@@ -175,15 +135,8 @@ const createPokemonCard = (pokemon) => {
     </div>
   `;
 
-  // <div class="moves">
-  // <div>${moves[0]}</div>
-  // <div>${moves[1]}</div>
-  // </div>
-
   pokemonEl.innerHTML = pokemonInnerHTML;
-  // Add event listener to open new page on card click
   pokemonEl.addEventListener("click", () => {
-    // Open new page with specific card details
     window.open(`details.html?id=${id}`, "_self");
   });
 
@@ -219,14 +172,12 @@ window.addEventListener("scroll", function () {
   }
 });
 
-document
-  .getElementById("scrollToTopBtn")
-  .addEventListener("click", function () {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+document.getElementById("scrollToTopBtn").addEventListener("click", function () {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
   });
+});
 
 window.addEventListener("scroll", function () {
   var scrollToDownBtn = document.getElementById("scrollToDownBtn");
@@ -237,57 +188,45 @@ window.addEventListener("scroll", function () {
   }
 });
 
-document
-  .getElementById("scrollToDownBtn")
-  .addEventListener("click", function () {
-    window.scrollTo({
-      top: 999999,
-      behavior: "smooth",
-    });
+document.getElementById("scrollToDownBtn").addEventListener("click", function () {
+  window.scrollTo({
+    top: 999999,
+    behavior: "smooth",
   });
+});
+
 function search_pokemon() {
   let input = document.getElementById("searchbar").value;
   input = input.toLowerCase();
   input = input.replace(/\s+/g, ""); // removing all spaces from search box
-  // storing all card along wiith details in variable
   let x = document.getElementsByClassName("cardContainer");
 
   for (i = 0; i < x.length; i++) {
-    // checking  the name or type entered by user from search box if doesn't match than dont display the message
     if (!x[i].innerHTML.toLowerCase().includes(input)) {
       x[i].style.display = "none";
-    }
-    // checking  the name or type entered by user from search box if doesn't match than dont display the pokemon card
-    else {
+    } else {
       x[i].style.display = "block";
     }
   }
 }
 
-
-// dark mode enabled
 const darkModeButton = document.getElementById("dark");
 
 darkModeButton.addEventListener("click", () => {
-
   let element = document.body;
   element.classList.toggle("dark-mode");
   document.body.classList.toggle("dark-mode");
 
   const regions = document.querySelectorAll(".regionvalue");
-  console.log(regions);
   regions.forEach(region => {
     region.classList.toggle("dark-mode");
   });
-
 });
 
 const darkModeIcon = document.getElementById("dark");
 darkModeButton.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   darkModeIcon.classList.toggle("fa-toggle-on");
-  // You can add additional elements that need dark mode here
 });
-
 
 changeRegion();
