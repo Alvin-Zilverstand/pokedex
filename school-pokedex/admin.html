@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Pokédex</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+</head>
+<body>
+    <h1>Admin - Pokédex</h1>
+    <form id="pokemon-form">
+        <input type="hidden" id="pokemon-id">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="type">Type:</label>
+        <input type="text" id="type" required>
+        <label for="image">Image URL:</label>
+        <input type="url" id="image" required>
+        <label for="stats">Stats (JSON):</label>
+        <textarea id="stats" required></textarea>
+        <label for="info">Info:</label>
+        <textarea id="info" required></textarea>
+        <button type="submit">Save</button>
+    </form>
+    <div id="admin-pokemon-list"></div>
+    <script src="admin-script.js"></script>
+</body>
+</html>
