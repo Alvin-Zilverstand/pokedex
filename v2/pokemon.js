@@ -12,6 +12,7 @@ fetch(`./get-pokemon.php`)
   .then((data) => {
     if (Array.isArray(data)) {
       allPokemons = data;
+      cacheImages(allPokemons);
       displayPokemons(allPokemons);
     } else {
       console.error("Unexpected response format:", data);
@@ -30,14 +31,32 @@ async function fetchPokemonDataBeforeRedirect(id) {
 
     return true;
   } catch (error) {
-    console.error("Failed to fetch Pokémon data before redirect");
+    console.error("Failed to fetch Pokémon data before redirect:", error);
+    return false;
   }
+}
+
+function cacheImages(pokemons) {
+  pokemons.forEach((pokemon) => {
+    const img = new Image();
+    img.src = pokemon.image_url;
+    img.onload = () => {
+      localStorage.setItem(`pokemon_image_${pokemon.id}`, pokemon.image_url);
+    };
+  });
+}
+
+function getCachedImageUrl(pokemonId) {
+  return localStorage.getItem(`pokemon_image_${pokemonId}`);
 }
 
 function displayPokemons(pokemons) {
   listWrapper.innerHTML = "";
 
   pokemons.forEach((pokemon) => {
+    const cachedImageUrl = getCachedImageUrl(pokemon.id);
+    const imageUrl = cachedImageUrl || pokemon.image_url;
+
     const listItem = document.createElement("div");
     listItem.className = "list-item";
     listItem.innerHTML = `
@@ -45,7 +64,7 @@ function displayPokemons(pokemons) {
             <p class="caption-fonts">#${pokemon.id}</p>
         </div>
         <div class="img-wrap">
-            <img src="${pokemon.image_url}" alt="${pokemon.name}" />
+            <img src="${imageUrl}" alt="${pokemon.name}" />
         </div>
         <div class="name-wrap">
             <p class="body3-fonts">#${pokemon.name}</p>
@@ -56,6 +75,8 @@ function displayPokemons(pokemons) {
       const success = await fetchPokemonDataBeforeRedirect(pokemon.id);
       if (success) {
         window.location.href = `./detail.html?id=${pokemon.id}`;
+      } else {
+        console.error(`Failed to fetch data for Pokémon ID: ${pokemon.id}`);
       }
     });
 
