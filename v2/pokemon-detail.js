@@ -15,14 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadPokemon(id) {
   try {
-    const [pokemon, pokemonSpecies] = await Promise.all([
-      fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) =>
-        res.json()
-      ),
-      fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) =>
-        res.json()
-      ),
-    ]);
+    const pokemon = await fetch(`./get-pokemon.php?id=${id}`).then((res) =>
+      res.json()
+    );
+
+    if (pokemon.error) {
+      throw new Error(pokemon.error);
+    }
 
     const abilitiesWrapper = document.querySelector(
       ".pokemon-detail-wrap .pokemon-detail.move"
@@ -31,9 +30,8 @@ async function loadPokemon(id) {
 
     if (currentPokemonId === id) {
       displayPokemonDetails(pokemon);
-      const flavorText = getEnglishFlavorText(pokemonSpecies);
       document.querySelector(".body3-fonts.pokemon-description").textContent =
-        flavorText;
+        pokemon.flavor_text;
 
       const [leftArrow, rightArrow] = ["#leftArrow", "#rightArrow"].map((sel) =>
         document.querySelector(sel)
@@ -57,7 +55,7 @@ async function loadPokemon(id) {
 
     return true;
   } catch (error) {
-    console.error("An error occured while fetching Pokemon data:", error);
+    console.error("An error occurred while fetching Pokémon data:", error);
     return false;
   }
 }

@@ -7,42 +7,45 @@ const notFoundMessage = document.querySelector("#not-found-message");
 
 let allPokemons = [];
 
-fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
+fetch(`./get-pokemon.php`)
   .then((response) => response.json())
   .then((data) => {
-    allPokemons = data.results;
-    displayPokemons(allPokemons);
+    if (Array.isArray(data)) {
+      allPokemons = data;
+      displayPokemons(allPokemons);
+    } else {
+      console.error("Unexpected response format:", data);
+    }
   });
 
 async function fetchPokemonDataBeforeRedirect(id) {
   try {
-    const [pokemon, pokemonSpecies] = await Promise.all([
-      fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) =>
-        res.json()
-      ),
-      fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) =>
-        res.json()
-      ),
-    ]);
+    const pokemon = await fetch(`./get-pokemon.php?id=${id}`).then((res) =>
+      res.json()
+    );
+
+    if (pokemon.error) {
+      throw new Error(pokemon.error);
+    }
+
     return true;
   } catch (error) {
-    console.error("Failed to fetch Pokemon data before redirect");
+    console.error("Failed to fetch Pokémon data before redirect");
   }
 }
 
-function displayPokemons(pokemon) {
+function displayPokemons(pokemons) {
   listWrapper.innerHTML = "";
 
-  pokemon.forEach((pokemon) => {
-    const pokemonID = pokemon.url.split("/")[6];
+  pokemons.forEach((pokemon) => {
     const listItem = document.createElement("div");
     listItem.className = "list-item";
     listItem.innerHTML = `
         <div class="number-wrap">
-            <p class="caption-fonts">#${pokemonID}</p>
+            <p class="caption-fonts">#${pokemon.id}</p>
         </div>
         <div class="img-wrap">
-            <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg" alt="${pokemon.name}" />
+            <img src="${pokemon.image_url}" alt="${pokemon.name}" />
         </div>
         <div class="name-wrap">
             <p class="body3-fonts">#${pokemon.name}</p>
@@ -50,9 +53,9 @@ function displayPokemons(pokemon) {
     `;
 
     listItem.addEventListener("click", async () => {
-      const success = await fetchPokemonDataBeforeRedirect(pokemonID);
+      const success = await fetchPokemonDataBeforeRedirect(pokemon.id);
       if (success) {
-        window.location.href = `./detail.html?id=${pokemonID}`;
+        window.location.href = `./detail.html?id=${pokemon.id}`;
       }
     });
 
@@ -68,7 +71,7 @@ function handleSearch() {
 
   if (numberFilter.checked) {
     filteredPokemons = allPokemons.filter((pokemon) => {
-      const pokemonID = pokemon.url.split("/")[6];
+      const pokemonID = pokemon.id.toString();
       return pokemonID.startsWith(searchTerm);
     });
   } else if (nameFilter.checked) {
