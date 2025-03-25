@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost:3306";
-$username = "database1";
-$password = "181t$1lJg";
-$dbname = "pokedex1";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "pokedex";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
