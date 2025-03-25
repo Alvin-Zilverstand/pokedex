@@ -34,12 +34,14 @@ if (isset($_GET['id'])) {
             LEFT JOIN stats st ON p.id = st.pokemon_id
             WHERE p.id = $id
             GROUP BY p.id";
+    logMessage("Executing query: $sql");
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $pokemon = $result->fetch_assoc();
         $pokemon['types'] = explode(',', $pokemon['types']);
         $pokemon['abilities'] = explode(',', $pokemon['abilities']);
+        logMessage("Query result: " . json_encode($pokemon));
         echo json_encode($pokemon);
     } else {
         logMessage("No Pokémon found for ID: $id");
@@ -47,12 +49,14 @@ if (isset($_GET['id'])) {
     }
 } else {
     $sql = "SELECT * FROM pokemon";
+    logMessage("Executing query: $sql");
     $result = $conn->query($sql);
 
     $pokemons = [];
     while ($row = $result->fetch_assoc()) {
         $pokemons[] = $row;
     }
+    logMessage("Query result: " . json_encode($pokemons));
     echo json_encode($pokemons);
 }
 

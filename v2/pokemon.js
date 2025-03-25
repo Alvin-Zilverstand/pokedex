@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (cachedData && cacheTimestamp && (Date.now() - cacheTimestamp) < CACHE_DURATION) {
     allPokemons = JSON.parse(cachedData);
+    console.log("Loaded Pokémon data from cache:", allPokemons);
     displayPokemons(allPokemons);
   } else {
     fetchPokemons();
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function fetchPokemons() {
+  console.log("Fetching Pokémon data from server...");
   fetch(`./get-pokemon.php`)
     .then((response) => response.json())
     .then((data) => {
@@ -28,6 +30,7 @@ function fetchPokemons() {
         allPokemons = data;
         localStorage.setItem("pokemons", JSON.stringify(allPokemons));
         localStorage.setItem("pokemons_timestamp", Date.now().toString());
+        console.log("Fetched and cached Pokémon data:", allPokemons);
         displayPokemons(allPokemons);
       } else {
         console.error("Unexpected response format:", data);
@@ -40,9 +43,13 @@ function fetchPokemons() {
 
 async function fetchPokemonDataBeforeRedirect(id) {
   try {
+    console.log(`Fetching data for Pokémon ID ${id} before redirect...`);
     const response = await fetch(`./get-pokemon.php?id=${id}`);
     const text = await response.text();
     console.log(`Response for Pokémon ID ${id}:`, text);
+    if (!text) {
+      throw new Error("Empty response from server");
+    }
     const pokemon = JSON.parse(text);
 
     if (pokemon.error) {
@@ -57,6 +64,7 @@ async function fetchPokemonDataBeforeRedirect(id) {
 }
 
 function displayPokemons(pokemons) {
+  console.log("Displaying Pokémon data:", pokemons);
   listWrapper.innerHTML = "";
 
   pokemons.forEach((pokemon) => {
@@ -90,6 +98,7 @@ function displayPokemons(pokemons) {
 }
 
 function lazyLoadImages() {
+  console.log("Initializing lazy loading for images...");
   const images = document.querySelectorAll('.img-wrap img[data-src]');
   const config = {
     root: null,
@@ -116,6 +125,7 @@ function preloadImage(img) {
   if (!src) {
     return;
   }
+  console.log("Preloading image:", src);
   img.src = src;
 }
 
@@ -123,6 +133,7 @@ searchInput.addEventListener("keyup", handleSearch);
 
 function handleSearch() {
   const searchTerm = searchInput.value.toLowerCase();
+  console.log("Handling search with term:", searchTerm);
   let filteredPokemons;
 
   if (numberFilter.checked) {
@@ -151,6 +162,7 @@ const closeButton = document.querySelector(".search-close-icon");
 closeButton.addEventListener("click", clearSearch);
 
 function clearSearch() {
+  console.log("Clearing search input and displaying all Pokémon...");
   searchInput.value = "";
   displayPokemons(allPokemons);
   notFoundMessage.style.display = "none";
