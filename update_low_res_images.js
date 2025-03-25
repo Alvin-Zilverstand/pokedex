@@ -1,12 +1,10 @@
 const mysql = require('mysql');
-const fs = require('fs');
-const path = require('path');
 
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'pokedex'
+  database: 'pokedex1'
 });
 
 connection.connect((err) => {
@@ -19,19 +17,19 @@ connection.connect((err) => {
 });
 
 function updateLowResImages() {
-  const imagesDir = path.join(__dirname, 'small-images');
-  fs.readdir(imagesDir, (err, files) => {
+  const query = 'SELECT id FROM pokemon';
+  connection.query(query, (err, results) => {
     if (err) {
-      console.error('Error reading the images directory:', err);
+      console.error('Error fetching Pokémon IDs:', err);
       return;
     }
 
-    files.forEach((file) => {
-      const id = path.parse(file).name;
-      const imageUrlLow = `/small-images/${file}`;
-      const query = 'UPDATE pokemon SET image_url_low = ? WHERE id = ?';
+    results.forEach((row) => {
+      const id = row.id;
+      const imageUrlLow = `./small-images/${id}.png`;
+      const updateQuery = 'UPDATE pokemon SET image_url_low = ? WHERE id = ?';
 
-      connection.query(query, [imageUrlLow, id], (err, result) => {
+      connection.query(updateQuery, [imageUrlLow, id], (err, result) => {
         if (err) {
           console.error(`Error updating image_url_low for Pokémon ID ${id}:`, err);
           return;
