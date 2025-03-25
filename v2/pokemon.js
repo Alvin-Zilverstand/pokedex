@@ -75,7 +75,7 @@ function displayPokemons(pokemons) {
             <p class="caption-fonts">#${pokemon.id}</p>
         </div>
         <div class="img-wrap">
-            <img data-src="${pokemon.image_url}" alt="${pokemon.name}" />
+            <img data-src-low="${pokemon.image_url_low}" data-src="${pokemon.image_url}" alt="${pokemon.name}" />
         </div>
         <div class="name-wrap">
             <p class="body3-fonts">#${pokemon.name}</p>
@@ -121,12 +121,19 @@ function lazyLoadImages() {
 }
 
 function preloadImage(img) {
+  const srcLow = img.getAttribute('data-src-low');
   const src = img.getAttribute('data-src');
-  if (!src) {
+  if (!srcLow || !src) {
     return;
   }
-  console.log("Preloading image:", src);
-  img.src = src;
+  console.log("Preloading low-resolution image:", srcLow);
+  img.src = srcLow;
+  const highResImg = new Image();
+  highResImg.src = src;
+  highResImg.onload = () => {
+    console.log("Preloading high-resolution image:", src);
+    img.src = src;
+  };
 }
 
 searchInput.addEventListener("keyup", handleSearch);

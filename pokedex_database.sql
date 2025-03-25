@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS pokemon (
     weight INT,
     base_experience INT,
     species_url VARCHAR(255),
-    image_url VARCHAR(255)
+    image_url VARCHAR(255),
+    image_url_low VARCHAR(255)
 );
 
 -- Table to store Pokémon types

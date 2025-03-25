@@ -70,7 +70,9 @@
       </header>
       <section class="pokemon-list">
         <div class="container">
-          <div class="list-wrapper"></div>
+          <div class="list-wrapper">
+            <img data-src-low="${pokemon.image_url_low}" data-src="${pokemon.image_url}" alt="${pokemon.name}" />
+          </div>
         </div>
         <div id="not-found-message">Pokemon not found</div>
       </section>
