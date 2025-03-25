@@ -51,7 +51,7 @@ async function fetchPokemonDataBeforeRedirect(id) {
 
     return true;
   } catch (error) {
-    console.error("Failed to fetch Pokémon data before redirect:", error);
+    console.error(`Failed to fetch Pokémon data before redirect for ID ${id}:`, error);
     return false;
   }
 }

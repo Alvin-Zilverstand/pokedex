@@ -4,9 +4,19 @@ $username = "database1";
 $password = "181t$1lJg";
 $dbname = "pokedex1";
 
+// Set the custom log file path
+$logFile = __DIR__ . '/error_log.txt';
+
+// Function to log messages
+function logMessage($message) {
+    global $logFile;
+    error_log($message . "\n", 3, $logFile);
+}
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
+    logMessage("Connection failed: " . $conn->connect_error);
     die("Connection failed: " . $conn->connect_error);
 }
 
@@ -32,6 +42,7 @@ if (isset($_GET['id'])) {
         $pokemon['abilities'] = explode(',', $pokemon['abilities']);
         echo json_encode($pokemon);
     } else {
+        logMessage("No Pokémon found for ID: $id");
         echo json_encode(["error" => "No Pokémon found"]);
     }
 } else {
