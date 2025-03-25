@@ -78,7 +78,7 @@ function displayPokemons(pokemons) {
             <img data-src-low="${pokemon.image_url_low}" data-src="${pokemon.image_url}" alt="${pokemon.name}" />
         </div>
         <div class="name-wrap">
-            <p class="body3-fonts">#${pokemon.name}</p>
+            <p class="body3-fonts">${pokemon.name}</p>
         </div>
     `;
 
@@ -109,7 +109,7 @@ function lazyLoadImages() {
   let observer = new IntersectionObserver((entries, self) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        preloadImage(entry.target);
+        preloadLowResImage(entry.target);
         self.unobserve(entry.target);
       }
     });
@@ -120,19 +120,28 @@ function lazyLoadImages() {
   });
 }
 
-function preloadImage(img) {
+function preloadLowResImage(img) {
   const srcLow = img.getAttribute('data-src-low');
-  const src = img.getAttribute('data-src');
-  if (!srcLow || !src) {
+  if (!srcLow) {
     return;
   }
   console.log("Preloading low-resolution image:", srcLow);
   img.src = srcLow;
+  preloadHighResImage(img);
+}
+
+function preloadHighResImage(img) {
+  const src = img.getAttribute('data-src');
+  if (!src) {
+    return;
+  }
   const highResImg = new Image();
   highResImg.src = src;
   highResImg.onload = () => {
     console.log("Preloading high-resolution image:", src);
-    img.src = src;
+    setTimeout(() => {
+      img.src = src;
+    }, 2000); // Wait for 2 seconds before switching to high-resolution image
   };
 }
 

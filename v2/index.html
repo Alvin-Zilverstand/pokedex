@@ -72,7 +72,17 @@
       <section class="pokemon-list">
         <div class="container">
           <div class="list-wrapper">
-            <img data-src-low="${pokemon.image_url_low}" data-src="${pokemon.image_url}" alt="${pokemon.name}" />
+            <div class="list-item">
+              <div class="number-wrap">
+                <p class="caption-fonts">#${pokemon.id}</p>
+              </div>
+              <div class="img-wrap">
+                <img data-src-low="${pokemon.image_url_low}" data-src="${pokemon.image_url}" alt="${pokemon.name}" />
+              </div>
+              <div class="name-wrap">
+                <p class="body3-fonts">${pokemon.name}</p>
+              </div>
+            </div>
           </div>
         </div>
         <div id="not-found-message">Pokemon not found</div>
