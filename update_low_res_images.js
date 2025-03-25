@@ -4,9 +4,9 @@ const path = require('path');
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'database1',
-  password: '181t$1lJg',
-  database: 'pokedex1'
+  user: 'root',
+  password: '',
+  database: 'pokedex'
 });
 
 connection.connect((err) => {
