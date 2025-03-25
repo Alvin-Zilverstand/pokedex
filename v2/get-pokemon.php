@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-header("Cache-Control: max-age=3600"); // Cache for 1 hour
+header("Cache-Control: max-age=86400"); // Cache for 24 hours
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
