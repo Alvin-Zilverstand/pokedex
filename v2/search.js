@@ -27,6 +27,7 @@ function handleSearchCloseOnClick() {
   document
     .querySelector("#search-close-icon")
     .classList.remove("search-close-icon-visible");
+  clearSearch();
 }
 
 function handleSortIconOnClick() {
