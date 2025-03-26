@@ -530,3 +530,37 @@ div#not-found-message {
   border-color: transparent;
   background-color: transparent;
 }
+
+.actions-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.action-button {
+  padding: 10px 20px;
+  background-color: var(--identity-primary);
+  color: var(--grayscale-white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: darken(var(--identity-primary), 10%);
+}
+
+.competitors-list {
+  margin-top: 20px;
+}
+
+.competitors-list h2 {
+  text-align: center;
+  color: var(--grayscale-dark);
+}
+
+#competitors-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

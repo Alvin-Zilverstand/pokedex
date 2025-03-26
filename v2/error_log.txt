@@ -1,0 +1,4 @@
+Executing query: SELECT user_id, COUNT(pokemon_id) AS pokemon_count
+        FROM user_pokemon
+        GROUP BY user_id
+        ORDER BY pokemon_count DESC

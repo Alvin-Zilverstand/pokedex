@@ -7,6 +7,7 @@ const numberDescFilter = document.querySelector("#number-desc");
 const nameAscFilter = document.querySelector("#name-asc");
 const nameDescFilter = document.querySelector("#name-desc");
 const notFoundMessage = document.querySelector("#not-found-message");
+const competitorsWrapper = document.querySelector("#competitors-wrapper");
 
 let allPokemons = [];
 let filteredPokemons = [];
@@ -18,8 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cachedData && cacheTimestamp && (Date.now() - cacheTimestamp) < CACHE_DURATION) {
     allPokemons = JSON.parse(cachedData);
     console.log("Loaded Pokémon data from cache:", allPokemons);
-    filteredPokemons = allPokemons;
+    filteredPokemons = allPokemons.filter(pokemon => !pokemon.deleted);
     displayPokemons(filteredPokemons);
+    fetchCompetitors();
   } else {
     fetchPokemons();
   }
@@ -37,8 +39,9 @@ function fetchPokemons() {
         localStorage.setItem("pokemons", JSON.stringify(allPokemons));
         localStorage.setItem("pokemons_timestamp", Date.now().toString());
         console.log("Fetched and cached Pokémon data:", allPokemons);
-        filteredPokemons = allPokemons;
+        filteredPokemons = allPokemons.filter(pokemon => !pokemon.deleted);
         displayPokemons(filteredPokemons);
+        fetchCompetitors();
       } else {
         console.error("Unexpected response format:", data);
       }
@@ -165,7 +168,7 @@ function handleSearch() {
   filteredPokemons = allPokemons.filter((pokemon) => {
     const pokemonID = pokemon.id.toString();
     const pokemonName = pokemon.name.toLowerCase();
-    return pokemonID.startsWith(searchTerm) || pokemonName.startsWith(searchTerm);
+    return (pokemonID.startsWith(searchTerm) || pokemonName.startsWith(searchTerm)) && !pokemon.deleted;
   });
 
   displayPokemons(filteredPokemons);
@@ -197,7 +200,42 @@ closeButton.addEventListener("click", clearSearch);
 function clearSearch() {
   console.log("Clearing search input and displaying all Pokémon...");
   searchInput.value = "";
-  filteredPokemons = allPokemons;
+  filteredPokemons = allPokemons.filter(pokemon => !pokemon.deleted);
   displayPokemons(filteredPokemons);
   notFoundMessage.style.display = "none";
+}
+
+function fetchCompetitors() {
+  console.log("Fetching competitors data from server...");
+  fetch(`./get-competitors.php`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Competitors data:", data);
+      displayCompetitors(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching competitors data:", error);
+    });
+}
+
+function displayCompetitors(competitors) {
+  competitorsWrapper.innerHTML = "";
+
+  competitors.forEach((competitor) => {
+    const listItem = document.createElement("div");
+    listItem.className = "list-item";
+    listItem.innerHTML = `
+        <div class="number-wrap">
+            <p class="caption-fonts">#${competitor.id}</p>
+        </div>
+        <div class="name-wrap">
+            <p class="body3-fonts">${competitor.name}</p>
+        </div>
+        <div class="pokemon-count">
+            <p class="body3-fonts">Pokémon: ${competitor.pokemon_count}</p>
+        </div>
+    `;
+
+    competitorsWrapper.appendChild(listItem);
+  });
 }
