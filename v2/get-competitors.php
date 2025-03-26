@@ -21,6 +21,7 @@ if ($conn->connect_error) {
 }
 
 header("Cache-Control: max-age=86400"); // Cache for 24 hours
+header("Content-Type: application/json"); // Ensure JSON response
 
 // Fetch competitors data
 $sql = "SELECT user_id, COUNT(pokemon_id) AS pokemon_count
@@ -30,12 +31,17 @@ $sql = "SELECT user_id, COUNT(pokemon_id) AS pokemon_count
 logMessage("Executing query: $sql");
 $result = $conn->query($sql);
 
-$competitors = [];
-while ($row = $result->fetch_assoc()) {
-    $competitors[] = $row;
+if ($result) {
+    $competitors = [];
+    while ($row = $result->fetch_assoc()) {
+        $competitors[] = $row;
+    }
+    logMessage("Query result: " . json_encode($competitors));
+    echo json_encode($competitors);
+} else {
+    logMessage("Error executing query: " . $conn->error);
+    echo json_encode(["error" => "Error fetching competitors data"]);
 }
-logMessage("Query result: " . json_encode($competitors));
-echo json_encode($competitors);
 
 $conn->close();
 ?>

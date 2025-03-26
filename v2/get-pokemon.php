@@ -21,6 +21,7 @@ if ($conn->connect_error) {
 }
 
 header("Cache-Control: max-age=86400"); // Cache for 24 hours
+header("Content-Type: application/json"); // Ensure JSON response
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
@@ -37,27 +38,37 @@ if (isset($_GET['id'])) {
     logMessage("Executing query: $sql");
     $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        $pokemon = $result->fetch_assoc();
-        $pokemon['types'] = explode(',', $pokemon['types']);
-        $pokemon['abilities'] = explode(',', $pokemon['abilities']);
-        logMessage("Query result: " . json_encode($pokemon));
-        echo json_encode($pokemon);
+    if ($result) {
+        if ($result->num_rows > 0) {
+            $pokemon = $result->fetch_assoc();
+            $pokemon['types'] = explode(',', $pokemon['types']);
+            $pokemon['abilities'] = explode(',', $pokemon['abilities']);
+            logMessage("Query result: " . json_encode($pokemon));
+            echo json_encode($pokemon);
+        } else {
+            logMessage("No Pokémon found for ID: $id");
+            echo json_encode(["error" => "No Pokémon found"]);
+        }
     } else {
-        logMessage("No Pokémon found for ID: $id");
-        echo json_encode(["error" => "No Pokémon found"]);
+        logMessage("Error executing query: " . $conn->error);
+        echo json_encode(["error" => "Error fetching Pokémon data"]);
     }
 } else {
     $sql = "SELECT * FROM pokemon WHERE deleted = 0";
     logMessage("Executing query: $sql");
     $result = $conn->query($sql);
 
-    $pokemons = [];
-    while ($row = $result->fetch_assoc()) {
-        $pokemons[] = $row;
+    if ($result) {
+        $pokemons = [];
+        while ($row = $result->fetch_assoc()) {
+            $pokemons[] = $row;
+        }
+        logMessage("Query result: " . json_encode($pokemons));
+        echo json_encode($pokemons);
+    } else {
+        logMessage("Error executing query: " . $conn->error);
+        echo json_encode(["error" => "Error fetching Pokémon data"]);
     }
-    logMessage("Query result: " . json_encode($pokemons));
-    echo json_encode($pokemons);
 }
 
 $conn->close();

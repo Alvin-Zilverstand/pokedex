@@ -33,17 +33,21 @@ function fetchPokemons() {
     .then((response) => response.text())
     .then((text) => {
       console.log("Server response:", text);
-      const data = JSON.parse(text);
-      if (Array.isArray(data)) {
-        allPokemons = data;
-        localStorage.setItem("pokemons", JSON.stringify(allPokemons));
-        localStorage.setItem("pokemons_timestamp", Date.now().toString());
-        console.log("Fetched and cached Pokémon data:", allPokemons);
-        filteredPokemons = allPokemons.filter(pokemon => !pokemon.deleted);
-        displayPokemons(filteredPokemons);
-        fetchCompetitors();
-      } else {
-        console.error("Unexpected response format:", data);
+      try {
+        const data = JSON.parse(text);
+        if (Array.isArray(data)) {
+          allPokemons = data;
+          localStorage.setItem("pokemons", JSON.stringify(allPokemons));
+          localStorage.setItem("pokemons_timestamp", Date.now().toString());
+          console.log("Fetched and cached Pokémon data:", allPokemons);
+          filteredPokemons = allPokemons.filter(pokemon => !pokemon.deleted);
+          displayPokemons(filteredPokemons);
+          fetchCompetitors();
+        } else {
+          console.error("Unexpected response format:", data);
+        }
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
       }
     })
     .catch((error) => {
@@ -208,10 +212,15 @@ function clearSearch() {
 function fetchCompetitors() {
   console.log("Fetching competitors data from server...");
   fetch(`./get-competitors.php`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Competitors data:", data);
-      displayCompetitors(data);
+    .then((response) => response.text())
+    .then((text) => {
+      console.log("Competitors data:", text);
+      try {
+        const data = JSON.parse(text);
+        displayCompetitors(data);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
     })
     .catch((error) => {
       console.error("Error fetching competitors data:", error);

@@ -2,3 +2,315 @@ Executing query: SELECT user_id, COUNT(pokemon_id) AS pokemon_count
         FROM user_pokemon
         GROUP BY user_id
         ORDER BY pokemon_count DESC
+Executing query: INSERT INTO pokemon (id, name, height, weight, base_experience, species_url, image_url)
+            VALUES (1, '1', 1, 1, 1, '1', '1')
+Executing query: SELECT user_id, COUNT(pokemon_id) AS pokemon_count
+        FROM user_pokemon
+        GROUP BY user_id
+        ORDER BY pokemon_count DESC
+Executing query: INSERT INTO pokemon (id, name, height, weight, base_experience, species_url, image_url)
+            VALUES (1, '1', 1, 1, 1, '1', '1')
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
+Executing query: SELECT user_id, COUNT(pokemon_id) AS pokemon_count
+        FROM user_pokemon
+        GROUP BY user_id
+        ORDER BY pokemon_count DESC
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 1 AND p.deleted = 0
+            GROUP BY p.id
