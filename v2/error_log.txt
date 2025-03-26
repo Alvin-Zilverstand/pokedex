@@ -187,3 +187,113 @@ Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP
             WHERE p.id = 307
             GROUP BY p.id
 Query result: {"id":"307","name":"meditite","height":"6","weight":"112","base_experience":"56","species_url":null,"image_url":".\/images\/307.png","image_url_low":".\/small-images\/307.png","flavor_text":"\uff11\u306b\u3061\u3000\uff11\u3053\u3060\u3051\u3000\u304d\u306e\u307f\u3092\u3000\u305f\u3079\u308b\u3002\n\u304f\u3046\u3075\u304f\u306b\u3000\u305f\u3048\u308b\u3053\u3068\u3067\n\u3053\u3053\u308d\u304c\u3000\u3068\u304e\u3059\u307e\u3055\u308c\u3066\u3044\u304f\u3002","types":["fighting","fighting","psychic","psychic"],"abilities":["telepathy","pure-power","telepathy","pure-power"],"hp":"30","attack":"40","defense":"55","sp_attack":"40","sp_defense":"55","speed":"60"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 307
+            GROUP BY p.id
+Query result: {"id":"307","name":"meditite","height":"6","weight":"112","base_experience":"56","species_url":null,"image_url":".\/images\/307.png","image_url_low":".\/small-images\/307.png","flavor_text":"\uff11\u306b\u3061\u3000\uff11\u3053\u3060\u3051\u3000\u304d\u306e\u307f\u3092\u3000\u305f\u3079\u308b\u3002\n\u304f\u3046\u3075\u304f\u306b\u3000\u305f\u3048\u308b\u3053\u3068\u3067\n\u3053\u3053\u308d\u304c\u3000\u3068\u304e\u3059\u307e\u3055\u308c\u3066\u3044\u304f\u3002","types":["fighting","fighting","psychic","psychic"],"abilities":["telepathy","pure-power","telepathy","pure-power"],"hp":"30","attack":"40","defense":"55","sp_attack":"40","sp_defense":"55","speed":"60"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 307
+            GROUP BY p.id
+Query result: {"id":"307","name":"meditite","height":"6","weight":"112","base_experience":"56","species_url":null,"image_url":".\/images\/307.png","image_url_low":".\/small-images\/307.png","flavor_text":"\uff11\u306b\u3061\u3000\uff11\u3053\u3060\u3051\u3000\u304d\u306e\u307f\u3092\u3000\u305f\u3079\u308b\u3002\n\u304f\u3046\u3075\u304f\u306b\u3000\u305f\u3048\u308b\u3053\u3068\u3067\n\u3053\u3053\u308d\u304c\u3000\u3068\u304e\u3059\u307e\u3055\u308c\u3066\u3044\u304f\u3002","types":["fighting","fighting","psychic","psychic"],"abilities":["telepathy","pure-power","telepathy","pure-power"],"hp":"30","attack":"40","defense":"55","sp_attack":"40","sp_defense":"55","speed":"60"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 306
+            GROUP BY p.id
+Query result: {"id":"306","name":"aggron","height":"21","weight":"3600","base_experience":"265","species_url":null,"image_url":".\/images\/306.png","image_url_low":".\/small-images\/306.png","flavor_text":"AGGRON claims an entire mountain as its\nown territory. It mercilessly beats up\nanything that violates its environment. This POK\u00e9MON vigilantly patrols its\nterritory at all times.","types":["rock","rock","rock","steel","steel","steel"],"abilities":["rock-head","sturdy","heavy-metal","rock-head","sturdy","heavy-metal"],"hp":"70","attack":"110","defense":"180","sp_attack":"60","sp_defense":"60","speed":"50"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 306
+            GROUP BY p.id
+Query result: {"id":"306","name":"aggron","height":"21","weight":"3600","base_experience":"265","species_url":null,"image_url":".\/images\/306.png","image_url_low":".\/small-images\/306.png","flavor_text":"AGGRON claims an entire mountain as its\nown territory. It mercilessly beats up\nanything that violates its environment. This POK\u00e9MON vigilantly patrols its\nterritory at all times.","types":["rock","rock","rock","steel","steel","steel"],"abilities":["rock-head","sturdy","heavy-metal","rock-head","sturdy","heavy-metal"],"hp":"70","attack":"110","defense":"180","sp_attack":"60","sp_defense":"60","speed":"50"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 305
+            GROUP BY p.id
+Query result: {"id":"305","name":"lairon","height":"9","weight":"1200","base_experience":"151","species_url":null,"image_url":".\/images\/305.png","image_url_low":".\/small-images\/305.png","flavor_text":"LAIRON tempers its steel body by\ndrinking highly nutritious mineral\nspringwater until it is bloated. This POK\u00e9MON makes its nest close to\nsprings of delicious water.","types":["rock","rock","rock","steel","steel","steel"],"abilities":["rock-head","sturdy","heavy-metal","rock-head","sturdy","heavy-metal"],"hp":"60","attack":"90","defense":"140","sp_attack":"50","sp_defense":"50","speed":"40"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 306
+            GROUP BY p.id
+Query result: {"id":"306","name":"aggron","height":"21","weight":"3600","base_experience":"265","species_url":null,"image_url":".\/images\/306.png","image_url_low":".\/small-images\/306.png","flavor_text":"AGGRON claims an entire mountain as its\nown territory. It mercilessly beats up\nanything that violates its environment. This POK\u00e9MON vigilantly patrols its\nterritory at all times.","types":["rock","rock","rock","steel","steel","steel"],"abilities":["rock-head","sturdy","heavy-metal","rock-head","sturdy","heavy-metal"],"hp":"70","attack":"110","defense":"180","sp_attack":"60","sp_defense":"60","speed":"50"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 305
+            GROUP BY p.id
+Query result: {"id":"305","name":"lairon","height":"9","weight":"1200","base_experience":"151","species_url":null,"image_url":".\/images\/305.png","image_url_low":".\/small-images\/305.png","flavor_text":"LAIRON tempers its steel body by\ndrinking highly nutritious mineral\nspringwater until it is bloated. This POK\u00e9MON makes its nest close to\nsprings of delicious water.","types":["rock","rock","rock","steel","steel","steel"],"abilities":["rock-head","sturdy","heavy-metal","rock-head","sturdy","heavy-metal"],"hp":"60","attack":"90","defense":"140","sp_attack":"50","sp_defense":"50","speed":"40"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 304
+            GROUP BY p.id
+Query result: {"id":"304","name":"aron","height":"4","weight":"600","base_experience":"66","species_url":null,"image_url":".\/images\/304.png","image_url_low":".\/small-images\/304.png","flavor_text":"This POK\u00e9MON has a body of steel.\nTo make its body, ARON feeds on\niron ore that it digs from mountains. Occasionally, it causes major trouble by\neating bridges and rails.","types":["rock","rock","rock","steel","steel","steel"],"abilities":["rock-head","sturdy","heavy-metal","rock-head","sturdy","heavy-metal"],"hp":"50","attack":"70","defense":"100","sp_attack":"40","sp_defense":"40","speed":"30"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 408
+            GROUP BY p.id
+Query result: {"id":"408","name":"cranidos","height":"9","weight":"315","base_experience":"70","species_url":null,"image_url":".\/images\/408.png","image_url_low":".\/small-images\/408.png","flavor_text":"It lived in jungles around 100\nmillion years ago. Its skull is as\nhard as iron.","types":["rock","rock"],"abilities":["sheer-force","mold-breaker"],"hp":"67","attack":"125","defense":"40","sp_attack":"30","sp_defense":"30","speed":"58"}
+Executing query: SELECT p.*, s.flavor_text, GROUP_CONCAT(t.name) AS types, GROUP_CONCAT(a.name) AS abilities, st.hp, st.attack, st.defense, st.sp_attack, st.sp_defense, st.speed
+            FROM pokemon p
+            LEFT JOIN species s ON p.id = s.pokemon_id
+            LEFT JOIN pokemon_types pt ON p.id = pt.pokemon_id
+            LEFT JOIN types t ON pt.type_id = t.id
+            LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
+            LEFT JOIN abilities a ON pa.ability_id = a.id
+            LEFT JOIN stats st ON p.id = st.pokemon_id
+            WHERE p.id = 408
+            GROUP BY p.id
+Query result: {"id":"408","name":"cranidos","height":"9","weight":"315","base_experience":"70","species_url":null,"image_url":".\/images\/408.png","image_url_low":".\/small-images\/408.png","flavor_text":"It lived in jungles around 100\nmillion years ago. Its skull is as\nhard as iron.","types":["rock","rock"],"abilities":["sheer-force","mold-breaker"],"hp":"67","attack":"125","defense":"40","sp_attack":"30","sp_defense":"30","speed":"58"}
