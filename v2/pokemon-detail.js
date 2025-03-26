@@ -1,11 +1,11 @@
 let currentPokemonId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const MAX_POKEMONS = 151;
   const pokemonID = new URLSearchParams(window.location.search).get("id");
   const id = parseInt(pokemonID, 10);
 
-  if (id < 1 || id > MAX_POKEMONS) {
+  if (isNaN(id) || id < 1) {
+    console.error(`Invalid Pokémon ID: ${id}`);
     return (window.location.href = "./index.html");
   }
 
@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadPokemon(id) {
   try {
+    console.log(`Loading data for Pokémon ID ${id}...`);
     const pokemon = await fetch(`./get-pokemon.php?id=${id}`).then((res) =>
       res.json()
     );
@@ -39,16 +40,12 @@ async function loadPokemon(id) {
       leftArrow.removeEventListener("click", navigatePokemon);
       rightArrow.removeEventListener("click", navigatePokemon);
 
-      if (id !== 1) {
-        leftArrow.addEventListener("click", () => {
-          navigatePokemon(id - 1);
-        });
-      }
-      if (id !== 151) {
-        rightArrow.addEventListener("click", () => {
-          navigatePokemon(id + 1);
-        });
-      }
+      leftArrow.addEventListener("click", () => {
+        navigatePokemon(id - 1);
+      });
+      rightArrow.addEventListener("click", () => {
+        navigatePokemon(id + 1);
+      });
 
       window.history.pushState({}, "", `./detail.html?id=${id}`);
     }

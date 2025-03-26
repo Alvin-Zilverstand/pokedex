@@ -28,8 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
 function fetchPokemons() {
   console.log("Fetching Pokémon data from server...");
   fetch(`./get-pokemon.php`)
-    .then((response) => response.json())
-    .then((data) => {
+    .then((response) => response.text())
+    .then((text) => {
+      console.log("Server response:", text);
+      const data = JSON.parse(text);
       if (Array.isArray(data)) {
         allPokemons = data;
         localStorage.setItem("pokemons", JSON.stringify(allPokemons));
