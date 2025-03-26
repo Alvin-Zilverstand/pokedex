@@ -1,16 +1,12 @@
-const MAX_POKEMON = 1050;
+const MAX_POKEMON = 151;
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 const listWrapper = document.querySelector(".list-wrapper");
 const searchInput = document.querySelector("#search-input");
-const numberAscFilter = document.querySelector("#number-asc");
-const numberDescFilter = document.querySelector("#number-desc");
-const nameAscFilter = document.querySelector("#name-asc");
-const nameDescFilter = document.querySelector("#name-desc");
+const numberFilter = document.querySelector("#number");
+const nameFilter = document.querySelector("#name");
 const notFoundMessage = document.querySelector("#not-found-message");
-const competitorsWrapper = document.querySelector("#competitors-wrapper");
 
 let allPokemons = [];
-let filteredPokemons = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   const cachedData = localStorage.getItem("pokemons");
@@ -19,9 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cachedData && cacheTimestamp && (Date.now() - cacheTimestamp) < CACHE_DURATION) {
     allPokemons = JSON.parse(cachedData);
     console.log("Loaded Pokémon data from cache:", allPokemons);
-    filteredPokemons = allPokemons.filter(pokemon => !pokemon.deleted);
-    displayPokemons(filteredPokemons);
-    fetchCompetitors();
+    displayPokemons(allPokemons);
   } else {
     fetchPokemons();
   }
@@ -30,24 +24,22 @@ document.addEventListener("DOMContentLoaded", () => {
 function fetchPokemons() {
   console.log("Fetching Pokémon data from server...");
   fetch(`./get-pokemon.php`)
-    .then((response) => response.text())
-    .then((text) => {
-      console.log("Server response:", text);
-      try {
-        const data = JSON.parse(text);
-        if (Array.isArray(data)) {
-          allPokemons = data;
-          localStorage.setItem("pokemons", JSON.stringify(allPokemons));
-          localStorage.setItem("pokemons_timestamp", Date.now().toString());
-          console.log("Fetched and cached Pokémon data:", allPokemons);
-          filteredPokemons = allPokemons.filter(pokemon => !pokemon.deleted);
-          displayPokemons(filteredPokemons);
-          fetchCompetitors();
-        } else {
-          console.error("Unexpected response format:", data);
-        }
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Server response:", data);
+      if (Array.isArray(data)) {
+        allPokemons = data;
+        localStorage.setItem("pokemons", JSON.stringify(allPokemons));
+        localStorage.setItem("pokemons_timestamp", Date.now().toString());
+        console.log("Fetched and cached Pokémon data:", allPokemons);
+        displayPokemons(allPokemons);
+      } else {
+        console.error("Unexpected response format:", data);
       }
     })
     .catch((error) => {
@@ -59,12 +51,11 @@ async function fetchPokemonDataBeforeRedirect(id) {
   try {
     console.log(`Fetching data for Pokémon ID ${id} before redirect...`);
     const response = await fetch(`./get-pokemon.php?id=${id}`);
-    const text = await response.text();
-    console.log(`Response for Pokémon ID ${id}:`, text);
-    if (!text) {
-      throw new Error("Empty response from server");
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
     }
-    const pokemon = JSON.parse(text);
+    const pokemon = await response.json();
+    console.log(`Response for Pokémon ID ${id}:`, pokemon);
 
     if (pokemon.error) {
       throw new Error(pokemon.error);
@@ -123,7 +114,7 @@ function lazyLoadImages() {
   let observer = new IntersectionObserver((entries, self) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        preloadLowResImage(entry.target);
+        preloadImage(entry.target);
         self.unobserve(entry.target);
       }
     });
@@ -134,21 +125,14 @@ function lazyLoadImages() {
   });
 }
 
-function preloadLowResImage(img) {
+function preloadImage(img) {
   const srcLow = img.getAttribute('data-src-low');
-  if (!srcLow) {
+  const src = img.getAttribute('data-src');
+  if (!srcLow || !src) {
     return;
   }
   console.log("Preloading low-resolution image:", srcLow);
   img.src = srcLow;
-  preloadHighResImage(img);
-}
-
-function preloadHighResImage(img) {
-  const src = img.getAttribute('data-src');
-  if (!src) {
-    return;
-  }
   const highResImg = new Image();
   highResImg.src = src;
   highResImg.onload = () => {
@@ -160,20 +144,24 @@ function preloadHighResImage(img) {
 }
 
 searchInput.addEventListener("keyup", handleSearch);
-numberAscFilter.addEventListener("change", handleSort);
-numberDescFilter.addEventListener("change", handleSort);
-nameAscFilter.addEventListener("change", handleSort);
-nameDescFilter.addEventListener("change", handleSort);
 
 function handleSearch() {
   const searchTerm = searchInput.value.toLowerCase();
   console.log("Handling search with term:", searchTerm);
+  let filteredPokemons;
 
-  filteredPokemons = allPokemons.filter((pokemon) => {
-    const pokemonID = pokemon.id.toString();
-    const pokemonName = pokemon.name.toLowerCase();
-    return (pokemonID.startsWith(searchTerm) || pokemonName.startsWith(searchTerm)) && !pokemon.deleted;
-  });
+  if (numberFilter.checked) {
+    filteredPokemons = allPokemons.filter((pokemon) => {
+      const pokemonID = pokemon.id.toString();
+      return pokemonID.startsWith(searchTerm);
+    });
+  } else if (nameFilter.checked) {
+    filteredPokemons = allPokemons.filter((pokemon) =>
+      pokemon.name.toLowerCase().startsWith(searchTerm)
+    );
+  } else {
+    filteredPokemons = allPokemons;
+  }
 
   displayPokemons(filteredPokemons);
 
@@ -184,67 +172,12 @@ function handleSearch() {
   }
 }
 
-function handleSort() {
-  if (numberAscFilter.checked) {
-    filteredPokemons.sort((a, b) => a.id - b.id);
-  } else if (numberDescFilter.checked) {
-    filteredPokemons.sort((a, b) => b.id - a.id);
-  } else if (nameAscFilter.checked) {
-    filteredPokemons.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (nameDescFilter.checked) {
-    filteredPokemons.sort((a, b) => b.name.localeCompare(a.name));
-  }
-
-  displayPokemons(filteredPokemons);
-}
-
 const closeButton = document.querySelector(".search-close-icon");
 closeButton.addEventListener("click", clearSearch);
 
 function clearSearch() {
   console.log("Clearing search input and displaying all Pokémon...");
   searchInput.value = "";
-  filteredPokemons = allPokemons.filter(pokemon => !pokemon.deleted);
-  displayPokemons(filteredPokemons);
+  displayPokemons(allPokemons);
   notFoundMessage.style.display = "none";
-}
-
-function fetchCompetitors() {
-  console.log("Fetching competitors data from server...");
-  fetch(`./get-competitors.php`)
-    .then((response) => response.text())
-    .then((text) => {
-      console.log("Competitors data:", text);
-      try {
-        const data = JSON.parse(text);
-        displayCompetitors(data);
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching competitors data:", error);
-    });
-}
-
-function displayCompetitors(competitors) {
-  competitorsWrapper.innerHTML = "";
-
-  competitors.forEach((competitor) => {
-    const listItem = document.createElement("div");
-    listItem.className = "list-item";
-    listItem.innerHTML = `
-        <div class="number-wrap">
-            <p class="caption-fonts">#${competitor.id}</p>
-        </div>
-        <div class="name-wrap">
-            <p class="body3-fonts">${competitor.name}</p>
-        </div>
-        <div class="pokemon-count">
-            <p class="body3-fonts">Pokémon: ${competitor.pokemon_count}</p>
-        </div>
-    `;
-
-    competitorsWrapper.appendChild(listItem);
-  });
 }
