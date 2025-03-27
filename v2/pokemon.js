@@ -246,13 +246,16 @@
       listItem.className = "list-item";
       listItem.innerHTML = `
           <div class="number-wrap">
-              <p class="caption-fonts">#${competitor.id}</p>
+              <p class="caption-fonts">User ID: ${competitor.user_id}</p>
+          </div>
+          <div class="img-wrap">
+              <img src="${competitor.image_url}" alt="${competitor.name}" />
           </div>
           <div class="name-wrap">
               <p class="body3-fonts">${competitor.name}</p>
           </div>
           <div class="pokemon-count">
-              <p class="body3-fonts">Pokémon: ${competitor.pokemon_count}</p>
+              <p class="body3-fonts">Pokémon Count: ${competitor.pokemon_count}</p>
           </div>
       `;
 

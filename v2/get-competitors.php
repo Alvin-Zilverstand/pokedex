@@ -27,10 +27,11 @@ header("Cache-Control: max-age=86400"); // Cache for 24 hours
 header("Content-Type: application/json"); // Ensure JSON response
 
 try {
-    // Fetch competitors data
-    $sql = "SELECT user_id, COUNT(pokemon_id) AS pokemon_count
-            FROM user_pokemon
-            GROUP BY user_id
+    // Fetch competitors data with Pokémon details
+    $sql = "SELECT u.user_id, COUNT(u.pokemon_id) AS pokemon_count, p.name, p.image_url
+            FROM user_pokemon u
+            JOIN pokemon p ON u.pokemon_id = p.id
+            GROUP BY u.user_id, p.name, p.image_url
             ORDER BY pokemon_count DESC";
     logMessage("Executing query: $sql");
     $result = $conn->query($sql);
