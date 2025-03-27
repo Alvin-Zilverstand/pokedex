@@ -213,19 +213,29 @@
   function fetchCompetitors() {
     console.log("Fetching competitors data from server...");
     fetch(`./get-competitors.php`)
-      .then((response) => response.text())
-      .then((text) => {
-        console.log("Competitors data:", text);
-        try {
-          const data = JSON.parse(text);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.error) {
+          console.error("Error from server:", data.error);
+          displayCompetitorsError(data.error);
+        } else {
           displayCompetitors(data);
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
         }
       })
       .catch((error) => {
         console.error("Error fetching competitors data:", error);
+        displayCompetitorsError("Failed to load competitors data. Please try again later.");
       });
+  }
+
+  function displayCompetitorsError(message) {
+    const competitorsWrapper = document.querySelector("#competitors-wrapper");
+    competitorsWrapper.innerHTML = `<p class="error-message">${message}</p>`;
   }
 
   function displayCompetitors(competitors) {
