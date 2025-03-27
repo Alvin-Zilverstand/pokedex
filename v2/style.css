@@ -79,6 +79,10 @@ input:focus-visible {
   display: none;
 }
 
+.arrow.hidden {
+  display: none;
+}
+
 body {
   margin: 0;
   height: 100vh;

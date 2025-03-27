@@ -25,6 +25,9 @@ async function loadPokemon(id) {
       throw new Error(pokemon.error);
     }
 
+    // Ensure the data is logged for debugging
+    console.log("Fetched Pokémon data:", pokemon);
+
     const abilitiesWrapper = document.querySelector(
       ".pokemon-detail-wrap .pokemon-detail.move"
     );
@@ -32,26 +35,22 @@ async function loadPokemon(id) {
 
     if (currentPokemonId === id) {
       displayPokemonDetails(pokemon);
-      document.querySelector(".body3-fonts.pokemon-description").textContent =
-        pokemon.flavor_text;
 
+      // Ensure flavor text is updated
+      document.querySelector(".body3-fonts.pokemon-description").textContent =
+        pokemon.flavor_text || "No description available.";
+
+      // Update navigation arrows
       const [leftArrow, rightArrow] = ["#leftArrow", "#rightArrow"].map((sel) =>
         document.querySelector(sel)
       );
-      leftArrow.removeEventListener("click", navigatePokemon);
-      rightArrow.removeEventListener("click", navigatePokemon);
+      leftArrow.classList.toggle("hidden", id === 1);
+      rightArrow.classList.toggle("hidden", id === 1050);
 
-      if (id !== 1) {
-        leftArrow.addEventListener("click", () => {
-          navigatePokemon(id - 1);
-        });
-      }
-      if (id !== 1050) {
-        rightArrow.addEventListener("click", () => {
-          navigatePokemon(id + 1);
-        });
-      }
+      leftArrow.onclick = id > 1 ? () => navigatePokemon(id - 1) : null;
+      rightArrow.onclick = id < 1050 ? () => navigatePokemon(id + 1) : null;
 
+      // Update URL without reloading
       window.history.pushState({}, "", `./detail.html?id=${id}`);
     }
 
