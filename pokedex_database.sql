@@ -97,3 +97,11 @@ CREATE TABLE IF NOT EXISTS pokemon_egg_groups (
     FOREIGN KEY (pokemon_id) REFERENCES pokemon(id),
     FOREIGN KEY (egg_group_id) REFERENCES egg_groups(id)
 );
+
+-- Table to store user Pokémon relationships
+CREATE TABLE IF NOT EXISTS user_pokemon (
+    user_id INT NOT NULL,
+    pokemon_id INT NOT NULL,
+    PRIMARY KEY (user_id, pokemon_id),
+    FOREIGN KEY (pokemon_id) REFERENCES pokemon(id)
+);

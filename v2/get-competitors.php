@@ -35,15 +35,21 @@ try {
     logMessage("Executing query: $sql");
     $result = $conn->query($sql);
 
-    if ($result) {
-        $competitors = [];
-        while ($row = $result->fetch_assoc()) {
-            $competitors[] = $row;
-        }
+    if ($result === false) {
+        throw new Exception("Query failed: " . $conn->error);
+    }
+
+    $competitors = [];
+    while ($row = $result->fetch_assoc()) {
+        $competitors[] = $row;
+    }
+
+    if (empty($competitors)) {
+        logMessage("No competitors data found.");
+        echo json_encode(["error" => "No competitors data found"]);
+    } else {
         logMessage("Query result: " . json_encode($competitors));
         echo json_encode($competitors);
-    } else {
-        throw new Exception("Error executing query: " . $conn->error);
     }
 } catch (Exception $e) {
     logMessage("Exception: " . $e->getMessage());
