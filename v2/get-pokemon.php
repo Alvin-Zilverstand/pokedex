@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
             LEFT JOIN stats st ON p.id = st.pokemon_id
             WHERE p.id = $id
             GROUP BY p.id";
-    logMessage("Executing query: $sql");
+    logMessage("Executing query for Pokémon ID: $id");
     $result = $conn->query($sql);
 
     if ($result === false) {
@@ -61,8 +61,7 @@ if (isset($_GET['id'])) {
         $pokemon = $result->fetch_assoc();
         $pokemon['types'] = $pokemon['types'] ? explode(',', $pokemon['types']) : [];
         $pokemon['abilities'] = $pokemon['abilities'] ? explode(',', $pokemon['abilities']) : [];
-        logMessage("Query result: " . json_encode($pokemon));
-        echo json_encode($pokemon);
+        echo json_encode($pokemon); // Only return JSON data
     } else {
         logMessage("No Pokémon found for ID: $id");
         echo json_encode(["error" => "No Pokémon found"]);
@@ -70,7 +69,7 @@ if (isset($_GET['id'])) {
 } else {
     // Handle requests without an 'id' parameter
     $sql = "SELECT id, name, height, weight, base_experience, image_url FROM pokemon";
-    logMessage("Executing query: $sql");
+    logMessage("Executing query to fetch all Pokémon");
     $result = $conn->query($sql);
 
     if ($result === false) {
@@ -84,8 +83,7 @@ if (isset($_GET['id'])) {
         $pokemons[] = $row;
     }
 
-    logMessage("Query result: " . json_encode($pokemons));
-    echo json_encode($pokemons);
+    echo json_encode($pokemons); // Only return JSON data
 }
 
 $conn->close();
