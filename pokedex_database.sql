@@ -105,3 +105,12 @@ CREATE TABLE IF NOT EXISTS user_pokemon (
     PRIMARY KEY (user_id, pokemon_id),
     FOREIGN KEY (pokemon_id) REFERENCES pokemon(id)
 );
+
+-- Insert sample data into the user_pokemon table
+INSERT INTO user_pokemon (user_id, pokemon_id) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 6);
