@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
             LEFT JOIN pokemon_abilities pa ON p.id = pa.pokemon_id
             LEFT JOIN abilities a ON pa.ability_id = a.id
             LEFT JOIN stats st ON p.id = st.pokemon_id
-            WHERE p.id = $id AND p.deleted = 0
+            WHERE p.id = $id
             GROUP BY p.id";
     logMessage("Executing query: $sql");
     $result = $conn->query($sql);
@@ -54,7 +54,7 @@ if (isset($_GET['id'])) {
         echo json_encode(["error" => "Error fetching Pokémon data"]);
     }
 } else {
-    $sql = "SELECT * FROM pokemon WHERE deleted = 0";
+    $sql = "SELECT * FROM pokemon";
     logMessage("Executing query: $sql");
     $result = $conn->query($sql);
 
