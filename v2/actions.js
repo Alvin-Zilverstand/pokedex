@@ -1,6 +1,7 @@
 document.querySelector("#register-pokemon").addEventListener("click", registerPokemon);
 document.querySelector("#edit-pokemon").addEventListener("click", editPokemon);
 document.querySelector("#delete-pokemon").addEventListener("click", deletePokemon);
+document.querySelector("#toggle-competitors").addEventListener("click", toggleCompetitors);
 
 function registerPokemon() {
   const name = prompt("Enter Pokémon name:");
@@ -101,4 +102,17 @@ function deletePokemon() {
     .catch((error) => {
       console.error("Error marking Pokémon as deleted:", error);
     });
+}
+
+function toggleCompetitors() {
+  const competitorsWrapper = document.querySelector("#competitors-wrapper");
+  const toggleButton = document.querySelector("#toggle-competitors");
+
+  if (competitorsWrapper.classList.contains("hidden")) {
+    competitorsWrapper.classList.remove("hidden");
+    toggleButton.textContent = "Hide";
+  } else {
+    competitorsWrapper.classList.add("hidden");
+    toggleButton.textContent = "Show";
+  }
 }

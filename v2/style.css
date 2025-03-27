@@ -568,3 +568,27 @@ div#not-found-message {
   justify-content: center;
   gap: 10px;
 }
+
+.collapsible {
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  overflow: hidden;
+}
+
+.collapsible.hidden {
+  max-height: 0;
+  opacity: 0;
+}
+
+.toggle-button {
+  background-color: var(--identity-primary);
+  color: var(--grayscale-white);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: var(--body2-font-size);
+}
+
+.toggle-button:hover {
+  background-color: darken(var(--identity-primary), 10%);
+}
