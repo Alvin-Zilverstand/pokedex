@@ -4,12 +4,14 @@
   const listWrapper = document.querySelector(".list-wrapper");
   const searchInput = document.querySelector("#search-input");
   const notFoundMessage = document.querySelector("#not-found-message");
+  const sortWrapper = document.querySelector(".sort-wrapper");
 
   let allPokemons = [];
   let filteredPokemons = [];
 
   document.addEventListener("DOMContentLoaded", () => {
     fetchPokemons();
+    setupSorting();
   });
 
   function fetchPokemons() {
@@ -50,7 +52,7 @@
       listItem.className = "list-item";
       listItem.innerHTML = `
           <div class="number-wrap">
-              <p class="caption-fonts">#${pokemon.id}</p>
+              <p class="caption-fonts">#${String(pokemon.id).padStart(3, "0")}</p>
           </div>
           <div class="img-wrap">
               <img src="${pokemon.image_url}" alt="${pokemon.name}" />
@@ -68,5 +70,35 @@
     } else {
       notFoundMessage.style.display = "none";
     }
+  }
+
+  function setupSorting() {
+    const sortOptions = document.querySelectorAll(".filter-wrap input[name='filters']");
+    sortOptions.forEach((option) => {
+      option.addEventListener("change", handleSortChange);
+    });
+  }
+
+  function handleSortChange(event) {
+    const sortValue = event.target.value;
+
+    switch (sortValue) {
+      case "number-asc":
+        filteredPokemons.sort((a, b) => a.id - b.id);
+        break;
+      case "number-desc":
+        filteredPokemons.sort((a, b) => b.id - a.id);
+        break;
+      case "name-asc":
+        filteredPokemons.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        filteredPokemons.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      default:
+        console.warn("Unknown sort option:", sortValue);
+    }
+
+    displayPokemons(filteredPokemons);
   }
 })();
