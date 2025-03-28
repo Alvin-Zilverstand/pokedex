@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS pokedex;
-USE pokedex;
+CREATE DATABASE IF NOT EXISTS pokedex1;
+USE pokedex1;
 
 -- Table to store Pokémon details
 CREATE TABLE IF NOT EXISTS pokemon (
